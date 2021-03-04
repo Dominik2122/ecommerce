@@ -1,0 +1,16 @@
+<div class='col'>
+
+<div class="card" style="width: 18rem;">
+{% if product.image %}
+  <img class="card-img-top" src="{{product.image.url}}" alt="" style="height: 18rem;">
+{% else %}
+<img class="card-img-top" src="/media/products/Profile-NotAvailable-300x300.png" alt="" style="height: 18rem;">
+{% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{product.title}}</h5>
+    <p class="card-text">{{product.price}} $</p>
+    <a href="{% url 'product:details' slug=product.slug %}" class="btn btn-primary">See</a>
+
+  </div>
+</div>
+</div>

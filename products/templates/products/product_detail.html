@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% load bootstrap4 %}
+
+<p>{{product.title}}</p>
+<p>{{object.description}}</p>
+{% if product.image %}
+<img src="{{object.image.url}}" alt="">
+{% endif %}
+{% endblock %}
