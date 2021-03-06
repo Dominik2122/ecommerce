@@ -1,3 +1,24 @@
 body {
     background: #b5d6f7;
 }
+
+
+.search-output {
+  background-color: white;
+  height: auto;
+  width: 62%;
+  margin:auto;
+  transition: height 2s;
+
+}
+
+.search-img {
+  height: 50px;
+  width : 50px;
+  float: left;
+}
+
+
+a {
+  color: black
+}

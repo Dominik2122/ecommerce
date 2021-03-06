@@ -25,7 +25,8 @@ urlpatterns = [
     path('', home_page, name = 'index'),
     path('login/', login_page, name = 'login'),
     path('register/', register_page, name = 'register'),
-    path('products/', include('products.urls'))
+    path('products/', include('products.urls')),
+    path('search/', include('search.urls'))
 ]
 
 
