@@ -2,20 +2,39 @@ body {
     background: #b5d6f7;
 }
 
+.card {
+  margin-top: 20px
+}
 
 .search-output {
   background-color: white;
   height: auto;
-  width: 62%;
-  margin:auto;
-  transition: height 2s;
+  margin: auto;
+}
 
+
+.search-item {
+  width: 25%;
+  height: 70px;
+  padding: 5px;
+  display: inline-block;
 }
 
 .search-img {
-  height: 50px;
-  width : 50px;
+  height: 70px;
+  width : 70px;
   float: left;
+}
+
+.search-img:hover {
+  height: 100%;
+  width : 100%;
+  transition: width 2s, height 2s;
+}
+
+.search-text {
+  width: 40%;
+  height: 40%;
 }
 
 

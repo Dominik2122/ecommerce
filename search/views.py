@@ -22,7 +22,7 @@ class SearchView(ListView):
         if query != None:
             products = Product.objects.filter(title__icontains = query)
             d = []
-            for product in list(products):
+            for product in list(products)[:12]:
                 pro = model_to_dict(product, fields=('title', 'price', 'active', 'slug'))
                 if product.image:
                     pro['url'] =  product.image.url
