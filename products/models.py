@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save
+from django.urls import reverse
 # Create your models here.
 
 class ProductQuerySet(models.query.QuerySet):
@@ -24,6 +25,9 @@ class Product(models.Model):
     timestamp = models.DateTimeField(auto_now_add = True)
 
     objects = ProductManager()
+
+    def get_absolute_url(self):
+        return reverse("product:details", kwargs={'slug':self.slug})
 
     def __str__(self):
         return self.title

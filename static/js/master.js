@@ -90,7 +90,9 @@ function searchResults(products){
   var searchOutput = $('.search-output')
   searchOutput.empty();
   for (var product of products) {
+    if (product === 'Sorry, not found'){
+      searchOutput.append(`<div class='search-item'><h3 class='seach-text'>Sorry, not found</h3></div>`)
+    } else {
     searchOutput.append(`<div class='search-item'><a href ='/products/${product['slug']}'> <h3 class='seach-text'><img src = "${product['url']}" class = 'search-img'> ${product['title']}</h3><h3  class = 'seach-text'> ${product['price']}$</h3></a></div>`)
-  }
-
+  }}
 }

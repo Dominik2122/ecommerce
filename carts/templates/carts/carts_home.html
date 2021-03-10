@@ -1,8 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
 {% load bootstrap4 %}
+{% if cart.products.exists %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product photo</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Product Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in cart.products.all %}
 
+    <tr>
+
+      <th scope="row">{{forloop.counter}}</th>
+
+      {% if product.image %}
+
+        <td><a href='{% url "product:details" slug=product.slug %}'><img src="{{product.image.url}}" alt='' style='height: 50px; width:50px'></a></td>
+      {% else %}
+      <td><img src="/media/products/Profile-NotAvailable-300x300.png" alt="" style='height: 50px; width:50px'></td>
+      {% endif %}
+
+      <td><a href='{% url "product:details" slug=product.slug %}'>{{product.title}}</a></td>
+      <td><a href='{% url "product:details" slug=product.slug %}'>{{product.price}}$</a></td>
+      <td><a href='#'><button>Remove</button></a></td>
+
+    </tr>
+
+    {% endfor %}
+    <tr>
+      <td colspan='2'> </td>
+      <td><b>Subtotal</b></td><td>{{cart.subtotal}}</td>
+    </tr>
+    <tr>
+      <td colspan='2'> </td>
+      <td><b>Total</b></td><td>{{cart.total}}</td>
+    </tr>
+  </tbody>
+</table>
+{% else %}
+<p class='lead'> Cart is empty </p>
+{% endif %}
 
 {% endblock %}
-
-</div>

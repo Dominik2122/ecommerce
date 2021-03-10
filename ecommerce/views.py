@@ -14,7 +14,9 @@ def login_page(request):
     login_form = LoginForm(request.POST or None)
     context = {'form': login_form}
     if login_form.is_valid():
+
         user = authenticate(request, username = login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
+        print(login_form.cleaned_data['username'], login_form.cleaned_data['password'], user)
         if user is not None:
             login(request,user)
             context['form'] = LoginForm()
@@ -32,8 +34,12 @@ def register_page(request):
         password = register_form.cleaned_data['password']
         password2 = register_form.cleaned_data['password2']
         email= register_form.cleaned_data['email']
-        new_user = User.objects.create_user(username, password, email)
+        new_user = User.objects.create_user(username, email)
         new_user.save()
+        new_user.set_password(password)
+        new_user.save()
+        login(request,new_user)
+        return redirect('index')
 
 
     return render(request,'register.html', context)

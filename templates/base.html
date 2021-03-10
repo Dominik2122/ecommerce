@@ -29,7 +29,7 @@
         <li class = "nav-item {% if request.path == '/' %}active{% endif %}"><a class="nav-link " href="{% url 'index' %}">Home</span></a></li>
         {% if user.is_authenticated %}
               <li><a href="{% url 'product:list' %}" class="nav-item nav-link  {% if request.path == '/products/' %}active{% endif %}">Products List</a></li>
-              <li><a href="#" class="nav-item nav-link mr">Log out</a></li>
+              <li><a href="{% url 'logout' %}" class="nav-item nav-link mr">Log out</a></li>
             </ul>
               {% include 'search.html' %}
 

@@ -10,6 +10,7 @@ body {
   background-color: white;
   height: auto;
   margin: auto;
+  border-radius: 25px;
 }
 
 
@@ -24,6 +25,7 @@ body {
   height: 70px;
   width : 70px;
   float: left;
+  border-radius: 5px;
 }
 
 .search-img:hover {

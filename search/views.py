@@ -19,7 +19,7 @@ class SearchView(ListView):
         if request.is_ajax():
             search = request.GET.get('search')
             query = search
-        if query != None:
+        if query != "":
             products = Product.objects.filter(title__icontains = query)
             d = []
             for product in list(products)[:12]:
@@ -29,6 +29,10 @@ class SearchView(ListView):
                 else:
                     pro['url'] = '/media/products/Profile-NotAvailable-300x300.png'
                 d.append(pro)
+
+            if len(d)==0:
+                d = ['Sorry, not found']
+            print(d)
             return JsonResponse({'products': d})
         else:
             return HttpResponseRedirect(reverse('index'))
