@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+{% load bootstrap4 %}
+
+{% if not billing_profile %}
+<div class='row text-center'>
+<div class='col-12 col-md-6'>
+<p class='lead'>Login</p>
+ <form method="post" action='{% url "accounts:login" %}'>
+   <input type="hidden" name='checkout' value="checkout">
+   {% csrf_token %}
+   {% bootstrap_form form  %}
+   <input type="submit" class = 'btn btn-default' value="Sign up">
+ </form>
+</div>
+<div class='col-12 col-md-6'>
+  <p class='lead'>Continue as guest</p>
+  <form method="post">
+    <input type="hidden" name='guest' value="guest">
+    {% csrf_token %}
+    {% bootstrap_form guest_form  %}
+    <input type="submit" class = 'btn btn-default' value="Sign up">
+  </form>
+</div></div>
+
+
+{% else %}
+<h1>Checkout </h1>
+<h1>Products: {{order.cart.products.all}}</h1>
+<h1>Order total: {{order.order_total}}</h1>
+
+{% endif %}
+
+{% endblock %}

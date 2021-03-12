@@ -1,45 +1,32 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, get_user_model
-
-from .forms import LoginForm, RegisterForm
-
-
-User = get_user_model()
-
-def home_page(request):
-    return render(request,'index.html', {})
-
-def login_page(request):
-    login_form = LoginForm(request.POST or None)
-    context = {'form': login_form}
-    if login_form.is_valid():
-
-        user = authenticate(request, username = login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
-        print(login_form.cleaned_data['username'], login_form.cleaned_data['password'], user)
-        if user is not None:
-            login(request,user)
-            context['form'] = LoginForm()
-            return redirect('index')
-        else:
-            return HttpResponse('error')
-
-    return render(request,'login.html', context)
-
-def register_page(request):
-    register_form = RegisterForm(request.POST or None)
-    context = {'form': register_form}
-    if register_form.is_valid():
-        username = register_form.cleaned_data['username']
-        password = register_form.cleaned_data['password']
-        password2 = register_form.cleaned_data['password2']
-        email= register_form.cleaned_data['email']
-        new_user = User.objects.create_user(username, email)
-        new_user.save()
-        new_user.set_password(password)
-        new_user.save()
-        login(request,new_user)
-        return redirect('index')
+from django.views.generic import TemplateView
+from django.urls import reverse
+from django.http import JsonResponse
+from django.core import serializers
+from django.forms.models import model_to_dict
 
 
-    return render(request,'register.html', context)
+from carts.models import Cart
+from products.models import Product
+
+import random
+
+
+class HomePage(TemplateView):
+    template_name = 'index.html'
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            products = Product.objects.all()
+            products = list(products)
+            random.shuffle(products)
+            d = []
+            for product in products[:6]:
+                pro = model_to_dict(product, fields=('title', 'price', 'active', 'slug'))
+                if product.image:
+                    pro['url'] =  product.image.url
+                else:
+                    pro['url'] = '/media/products/Profile-NotAvailable-300x300.png'
+                d.append(pro)
+            return JsonResponse({'products': d})
+        return super().get(request, *args, **kwargs)

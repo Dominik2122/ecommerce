@@ -1,5 +1,26 @@
+img {
+	border-radius:5px
+}
+
+h1, h2, h3, h4, h5, h6, p, a, nav {
+ color: #37404f;
+}
+
 body {
-    background: #b5d6f7;
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 2000% 2000%;
+	animation: gradient 40s ease infinite;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .card {
@@ -21,6 +42,9 @@ body {
   display: inline-block;
 }
 
+
+
+
 .search-img {
   height: 70px;
   width : 70px;
@@ -34,10 +58,10 @@ body {
   transition: width 2s, height 2s;
 }
 
-.search-text {
+/* .search-text {
   width: 40%;
   height: 40%;
-}
+} */
 
 
 a {

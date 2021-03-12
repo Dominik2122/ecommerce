@@ -27,7 +27,7 @@
 
       <td><a href='{% url "product:details" slug=product.slug %}'>{{product.title}}</a></td>
       <td><a href='{% url "product:details" slug=product.slug %}'>{{product.price}}$</a></td>
-      <td><a href='#'><button>Remove</button></a></td>
+      <td>{% include 'carts/snippets/delete.html' %}</td>
 
     </tr>
 
@@ -39,6 +39,7 @@
     <tr>
       <td colspan='2'> </td>
       <td><b>Total</b></td><td>{{cart.total}}</td>
+      <td><a class = 'btn btn-primary' href="{% url 'carts:checkout' %}" >Order!</a></td>
     </tr>
   </tbody>
 </table>

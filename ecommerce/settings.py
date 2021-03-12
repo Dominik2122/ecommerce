@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'bootstrap4',
     'products',
     'carts',
-    'search'
+    'search',
+    'orders',
+    'accounts',
+    'billing'
 ]
 
 MIDDLEWARE = [

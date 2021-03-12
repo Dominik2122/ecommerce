@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Welcome</h1>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index_style.css'%}"/>
+
+    <h1>BlueCube Shop</h1>
+    <h2>Treat yourself with something nice</h2>
+    <div class="products-list"></div>
+
+<script src="{% static "js/index.js"%}" type="text/javascript" ></script>
 
 {% endblock %}

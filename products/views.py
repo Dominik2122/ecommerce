@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 # Create your views here.
 from .models import Product
 from carts.models import Cart
+
 class ProductListView(ListView):
     model = Product
 
