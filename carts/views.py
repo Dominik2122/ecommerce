@@ -3,6 +3,7 @@ from products.models import Product
 from .models import Cart
 from orders.models import Order
 from accounts.forms import LoginForm, GuestForm
+from accounts.models import GuestEmail
 # Create your views here.
 
 def cart_home(request):
@@ -46,10 +47,10 @@ def checkout_home(request):
     guest_form = GuestForm(request.POST)
     if guest_form.is_valid():
         guest_form.save()
-        print(guest_form)
-        # request.session['guest_email_id'] = guest_form.id
-        guest_form =GuestForm()
-
+        email = guest_form.cleaned_data['email']
+        request.session['guest_email_value'] = email
+        billing_profile = GuestEmail.objects.filter(email=email).first()
+        print(billing_profile)
     context = {
         "order": order_obj,
         "billing_profile": billing_profile,

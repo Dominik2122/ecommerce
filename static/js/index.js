@@ -65,27 +65,37 @@ const updateProductList = () => {
 }
 
 $(document).ready(function(){
-  window.setInterval(()=>{updateProductList()}, 3500)
+  window.setInterval(()=>{updateProductList()}, 15000)
 })
+
+updateProductList()
+
+
 
 
 function addtoProductList(products){
   let productsList = $('.products-list')
-  productsList.empty()
-  for (let product of products) {
-    productsList.append(`
-      <div class='card'>
-        <a href ='/products/${product['slug']}'>
-          <h3 class=''>
-            <img src = "${product['url']}" class = ''>
-            ${product['title']}
-          </h3>
-          <h3  class = 'seach-text'>
-            ${product['price']}$
-          </h3>
-        </a>
-      </div>`)
-  }
+  productsList.fadeToggle(2000, "linear" )
+  setTimeout(()=>{
+    productsList.empty()
+    for (let product of products) {
+      productsList.append(`
+        <div class='card card-width'>
+          <a href ='/products/${product['slug']}'>
+            <h3 class=''>
+              <img src = "${product['url']}" class = 'card-img-top'>
+              ${product['title']}
+            </h3>
+            <h3  class = 'seach-text'>
+              ${product['price']}$
+            </h3>
+            <a href="/products/${product['slug']}" class="btn btn-primary">See</a>
+
+          </a>
+        </div>`)
+    }
+    productsList.fadeToggle( 2500, "linear" )
+  }, 2500)
 
 
 }

@@ -9,13 +9,20 @@ h2 {
 }
 
 .card {
-  
+  margin-top: 20px;
+  display: inline-block;
+  height: 24rem;
+  text-align: center;
 }
 
-
-.review-item {
-.card
+.card-width {
+	width: 20%
 }
+
+.card-img-top {
+  height: 16rem;
+}
+
 
 
 .search-img {
