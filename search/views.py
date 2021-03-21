@@ -20,6 +20,7 @@ class SearchView(ListView):
             search = request.GET.get('search')
             query = search
         if query != "":
+            print(query)
             products = Product.objects.filter(title__icontains = query)
             d = []
             for product in list(products)[:12]:
@@ -35,6 +36,6 @@ class SearchView(ListView):
             print(d)
             return JsonResponse({'products': d})
         else:
-            return HttpResponseRedirect(reverse('index'))
+            return JsonResponse({'products': None})
 
         return super().get(request, *args, **kwargs)

@@ -22,13 +22,91 @@
     <input type="submit" class = 'btn btn-default' value="Sign up">
   </form>
 </div></div>
-
+{% elif not address %}
+<div class='row text-center'>
+<div class='col-12 col-md-6'>
+<p class='lead'>Login</p>
+ <form method="post" >
+   <input type="hidden" name='address' value="address">
+   {% csrf_token %}
+   {% bootstrap_form address_form  %}
+   <input type="submit" class = 'btn btn-default' value="Add address">
+ </form>
+</div>
+</div>
 
 {% else %}
+{{address}}
 <h1>Checkout </h1>
-<h1>Products: {{order.cart.products.all}}</h1>
-<h1>Order total: {{order.order_total}}</h1>
+<div class='row text-center'>
+<div class='col-8 col-md-6'>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product photo</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Product Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in order.cart.products.all %}
 
+    <tr>
+
+      <th scope="row">{{forloop.counter}}</th>
+
+      {% if product.image %}
+
+        <td><a href='{% url "product:details" slug=product.slug %}'><img src="{{product.image.url}}" alt='' style='height: 50px; width:50px'></a></td>
+      {% else %}
+      <td><img src="/media/products/Profile-NotAvailable-300x300.png" alt="" style='height: 50px; width:50px'></td>
+      {% endif %}
+
+      <td><a href='{% url "product:details" slug=product.slug %}'>{{product.title}}</a></td>
+      <td><a href='{% url "product:details" slug=product.slug %}'>{{product.price}}$</a></td>
+
+
+    </tr>
+
+    {% endfor %}
+    <tr>
+      <td colspan='2'> </td>
+      <td><b>Subtotal</b></td><td>{{order.cart.subtotal}}</td>
+    </tr>
+    <tr>
+      <td colspan='2'> </td>
+      <td><b>Total</b></td><td>{{order.cart.total}}</td>
+
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class='col-4 col-md-4'>
+<table class="table">
+  <tbody>
+    <tr>
+      <td scope="row">Street</td> <td>{{address.street}} </td>
+    </tr>
+    <tr>
+      <td scope="row">City</td> <td>{{address.city}} </td>
+    </tr>
+    <tr>
+      <td scope="row">Phone</td> <td>{{address.phone}} </td>
+    </tr>
+    <tr>
+      <td>
+      <form method="post" >
+        {% csrf_token%}
+        <input type="hidden" name='success' value="success">
+        <input type="submit" class = 'btn btn-primary' value="Finalize">
+      </form>
+      </td>
+      <td><a class = 'btn btn-alert' href="{% url 'carts:address_update' pk=order.billing.address.pk %}" >Change address</a></b></td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 {% endif %}
 
 {% endblock %}

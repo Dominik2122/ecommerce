@@ -1,5 +1,5 @@
-<form class="form" method="POST" action ='{% url "carts:update" %}' class="search-form">
+<form class="form" method="POST" action ='{% url "carts:update" %}'>
     {% csrf_token %}
     <input type='hidden' name='product' value='{{product.id}}' />
-          <p>In cart</p> <button type="submit" name="button" class='btn btn-danger'>Remove?</button>
+    <button type="submit" name="button" class='btn btn-danger'>Remove?</button>
 </form>

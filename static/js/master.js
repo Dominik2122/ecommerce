@@ -89,10 +89,46 @@ function searchResults(products){
 
   var searchOutput = $('.search-output')
   searchOutput.empty();
+  if (products){
   for (var product of products) {
     if (product === 'Sorry, not found'){
       searchOutput.append(`<div class='search-item'><h3 class='seach-text'>Sorry, not found</h3></div>`)
     } else {
     searchOutput.append(`<div class='search-item'><a href ='/products/${product['slug']}'> <h3 class='seach-text'><img src = "${product['url']}" class = 'search-img'> ${product['title']}</h3><h3  class = 'seach-text'> ${product['price']}$</h3></a></div>`)
-  }}
+  }}}
 }
+
+
+
+
+  $(document).ready(function(){
+      let form = $('.ajax-cart')
+      form.submit(function(event){
+        event.preventDefault();
+        let thisForm = $(this)
+        let actionEndPoint = thisForm.attr('action')
+        let formData = thisForm.serialize();
+        $.ajax({
+          url: actionEndPoint,
+          method: "POST",
+          data: formData,
+          success: function(json){
+            let counter = $('.fa-shopping-cart')[0]
+            counter.innerHTML= json['counter']
+            let buttonPlace = $('.form-changer')
+            if (json['added']){
+              buttonPlace.html(`<button type="submit" name="button" class='btn btn-danger'>Remove?</button>`)
+            } else {
+              buttonPlace.html(`<button type="submit" name="button" class='btn btn-success'>Add?</button>`)
+            }
+
+
+
+
+
+          } ,
+          error: function(errorData){
+          }
+        })
+      })
+    })
