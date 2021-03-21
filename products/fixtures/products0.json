@@ -1,0 +1,77 @@
+[
+
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "Pink t-shirt",
+        "slug": "t-shirt",
+        "description": "Cool t-shirt",
+        "price": "20.00",
+        "image": "products/51DE4Ziu5iL._AC_UX342_.jpg",
+        "tags": null,
+        "active": true,
+        "timestamp": "2021-03-05T20:37:58.269Z",
+        "category": [
+            1,
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "Skinny jeans",
+        "slug": "jeans",
+        "description": "Blue jeans",
+        "price": "199.99",
+        "image": "products/jeansy-damskie-jasne-pepe-jeans-london_QiErkNL.jpg",
+        "tags": 3,
+        "active": true,
+        "timestamp": "2021-03-05T20:37:58.269Z",
+        "category": [
+             1,
+
+             2,
+             3
+         ]
+     }
+ },
+ {
+     "model": "products.product",
+     "pk": 3,
+     "fields": {
+         "title": "Brown belt",
+         "slug": "belt",
+         "description": "a good, brown belt",
+         "price": "100.00",
+         "image": "",
+         "tags": 7,
+         "active": true,
+         "timestamp": "2021-03-05T20:37:58.269Z",
+         "category": [
+             1,
+             2,
+             3
+         ]
+     }
+ },
+ {
+     "model": "products.product",
+     "pk": 4,
+     "fields": {
+         "title": "Bike 2000",
+         "slug": "bike",
+         "description": "Fast",
+         "price": "5000.00",
+         "image": "products/absolute-bikes-2020-1-mobile.jpg",
+         "tags": 4,
+         "active": true,
+         "timestamp": "2021-03-05T20:47:48.449Z",
+         "category": [
+             4
+         ]
+    }
+}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class = 'col-10 col-md-6 mx-auto'>
+<h1>Add Payment Method</h1>
+<form action="{% url 'billing:payment-method-endpoint' %}" method="post" id="payment-form" data-token='{{publish_key}}' data-next-url='/billing'>
+  {% csrf_token %}
+  <div class="form-row">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+    <div id="card-element" class='form-control'>
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+
+    <!-- Used to display Element errors. -->
+    <div id="card-errors" role="alert"></div>
+  </div>
+
+  <button class='btn btn-primary mr-3'>Submit Payment</button>
+</form>
+</div>
+
+<script>
+const stripe = Stripe('pk_test_51IXW3aCkhkhAd2s3FSB27u0ycISe07B0tQEGMhcKmqfZDDv2rMxIRAebwsd0EYrtCFPCurNhewcrrBqop69axiFv00vLk5rsta');
+const elements = stripe.elements();
+
+
+
+
+const style = {
+  base: {
+    // Add your base input styles here. For example:
+    fontSize: '16px',
+    color: '#32325d',
+  },
+};
+
+// Create an instance of the card Element.
+const card = elements.create('card', {style});
+
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+
+
+const stripeTokenHandler = (token) => {
+  // Insert the token ID into the form so it gets submitted to the server
+  const form = document.getElementById('payment-form');
+  const hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput);
+
+  // Submit the form
+  form.submit();
+}
+
+
+
+
+
+</script>
+{% endblock %}

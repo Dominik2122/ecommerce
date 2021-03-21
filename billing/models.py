@@ -1,9 +1,11 @@
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from phone_field import PhoneField
 User = settings.AUTH_USER_MODEL
 # Create your models here.
+import stripe
+stripe.api_key = 'sk_test_51IXW3aCkhkhAd2s3znmhkXSYIzCuKI4eB46wGwcfFO5yjkx7eXCmfgfXq8sUiAltXuyZJti88K59JHvC2r9HavWG00dgpPm050'
 
 
 class Address(models.Model):
@@ -20,12 +22,20 @@ class BillingProfile(models.Model):
     active      = models.BooleanField(default=True)
     update      = models.DateTimeField(auto_now=True)
     timestamp   = models.DateTimeField(auto_now_add=True)
+    customer_id = models.CharField(max_length=120, null=True, blank = True)
 
 
     def __str__(self):
         return self.email
 
+def billing_profile_created_receiver(sender,instance,*args,**kwargs):
+    if not instance.customer_id:
+        customer = stripe.Customer.create(
+            email = instance.email
+        )
+        instance.customer_id = customer.id
 
+pre_save.connect(billing_profile_created_receiver, sender = BillingProfile)
 
 def user_created_receiver(sender, instance, created, *args, **kwargs):
     if created and instance.email:
