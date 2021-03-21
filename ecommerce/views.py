@@ -21,6 +21,7 @@ class HomePage(TemplateView):
             products = list(products)
             random.shuffle(products)
             d = []
+            d = []
             for product in products[:6]:
                 pro = model_to_dict(product, fields=('title', 'price', 'active', 'slug'))
                 if product.image:
