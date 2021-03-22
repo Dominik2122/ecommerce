@@ -18,6 +18,7 @@ class Order(models.Model):
     shipping_total  = models.DecimalField(default=5.99, max_digits = 100, decimal_places = 2)
     order_total     = models.DecimalField(default=0.00, max_digits = 100, decimal_places = 2)
     active          = models.BooleanField(default=True)
+    timestamp       = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.order_id
